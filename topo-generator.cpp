@@ -28,8 +28,9 @@ int main(int argc, char* argv[]){
     int t, i, j, num_SV, num_TE, size_geo_SV, size_net_SV;
     double ratio;
     string input_geo_file, input_net_file, input_area_file, output_file;
+    unsigned seed;
 
-    if(argc == 8){
+    if(argc == 9){
         input_geo_file = argv[1];
         input_net_file = argv[2];
         input_area_file = argv[3];
@@ -37,6 +38,7 @@ int main(int argc, char* argv[]){
         num_SV = stoi(argv[5]);
         num_TE = stoi(argv[6]);
         ratio = stod(argv[7]);
+        seed = stoi(argv[8]);
     } else {
         input_geo_file = "models/NSFNET_geo.csv";
         input_net_file = "models/NSFNET_net.csv";
@@ -45,8 +47,11 @@ int main(int argc, char* argv[]){
         num_SV = 1;
         num_TE = 10;
         ratio = 0.3;
+        seed = 20240308;
     }
-        
+       
+    minstd_rand0 generator(seed);
+       
     ifstream ifs_geo(input_geo_file);
     ifstream ifs_net(input_net_file);
     ifstream ifs_area(input_area_file);
@@ -134,7 +139,7 @@ int main(int argc, char* argv[]){
 
     vector<vector<int>> te_distance(num_TE, vector<int>(size_geo_SV));
 
-    srand(time(NULL));
+    srand(seed);
 
     ofs << "E_T" << endl;
 
