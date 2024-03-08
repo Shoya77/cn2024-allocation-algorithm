@@ -23,11 +23,11 @@ make
 
 The binaries for generating topologies and running the algorithm will generated:
 
- * gen-data-cost239:
- * gen-data-jpn25:
- * gen-data-kanto:
- * gen-data-nsfnet:
- * allocator:
+ * gen-data-cost239: This binary generates the datasets for COST 239 model using basic parameters, number of servers, number of IoT devices, each server capacity, edge delays between a device and a servers and servers.
+ * gen-data-jpn25: This binary generates the datasets for JPN 25 model using basic parameters, number of servers, number of IoT devices, each server capacity, edge delays between a device and a servers and servers.
+ * gen-data-kanto: This binary generates the datasets for JPN Kanto model using basic parameters, number of servers, number of IoT devices, each server capacity, edge delays between a device and a servers and servers.
+ * gen-data-nsfnet: This binary generates the datasets for NSFNET model using basic parameters, number of servers, number of IoT devices, each server capacity, edge delays between a device and a servers and servers. 
+ * allocator: This binary solves the server allocation problem for the IoT monitoring services in a polynomial-time computational time complexity.
 
 
 To clean up the binaries use following command:
