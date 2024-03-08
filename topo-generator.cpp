@@ -27,14 +27,14 @@ int main(int argc, char* argv[]){
 
     int t, i, j, num_SV, num_TE, size_geo_SV, size_net_SV;
     double ratio;
-    string input_geo_file, input_net_file, input_area_file, output_file;
+    string input_geo_file, input_net_file, input_area_file, output_file_prefix;
     unsigned seed;
 
     if(argc == 9){
         input_geo_file = argv[1];
         input_net_file = argv[2];
         input_area_file = argv[3];
-        output_file = argv[4];
+        output_file_prefix = argv[4];
         num_SV = stoi(argv[5]);
         num_TE = stoi(argv[6]);
         ratio = stod(argv[7]);
@@ -43,13 +43,15 @@ int main(int argc, char* argv[]){
         input_geo_file = "models/NSFNET_geo.csv";
         input_net_file = "models/NSFNET_net.csv";
         input_area_file = "models/NSFNET_area.csv";
-        output_file = "data/NSFNET.txt";
+        output_file_prefix = "data/nsfnet";
         num_SV = 1;
         num_TE = 10;
         ratio = 0.3;
         seed = 20240308;
     }
-       
+      
+
+    string output_file = output_file_prefix + to_string(num_SV) + "-" + to_string(num_TE) + "-" + to_string(ratio) + "-" + to_string(seed) + ".txt";
     minstd_rand0 generator(seed);
        
     ifstream ifs_geo(input_geo_file);
