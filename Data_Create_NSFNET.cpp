@@ -23,15 +23,22 @@ vector<string> split(string& input, char delimiter)
     return result;
 }
 
-int main(){
+int main(int argc, char* argv[]){
 
     int t, i, j;
+    string input_file, output_file;
 
     vector<vector<double>> serv_location(14,vector<double>(2));
 
-    ofstream ofs("NSFNET_test_data5.txt");
-
-    ofstream ofs1("NSFNET_test_location.txt");
+    if(argc == 3){
+        input_file = argv[1];
+        output_file = argv[2];
+    } else {
+        input_file = "models/NSFNET.csv";
+        output_file = "data/NSFNET.txt";
+    }
+        
+    ofstream ofs(output_file);
 
     if(!ofs){
 
@@ -41,15 +48,7 @@ int main(){
 
     }
 
-    if(!ofs1){
-
-        cout << "Can't open output file1!" << endl;
-
-        return -1;
-
-    }
-
-    ifstream ifs("data_NSFNET/NSFNET_Serv_distance.csv");
+    ifstream ifs(input_file);
 
     vector<vector<int>> serv_distance(24,vector<int>(24));
 
@@ -213,8 +212,6 @@ int main(){
 
         }
 
-
-        ofs1 << t << " " << te_location[t][0] << " " << te_location[t][1] << endl;
 
         for(i = 0; i < num_SV; i++){
 
