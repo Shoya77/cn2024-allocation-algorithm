@@ -35,3 +35,18 @@ To clean up the binaries use following command:
 ```
 make clean
 ```
+data file create at "data/jpn2514-2000-0.300000-2024030801.txt"
+
+
+generate file
+
+```
+./generator models/JPN25_geo.csv models/JPN25_net.csv models/JPN25_area.csv data/jpn25 14 2000 0.3 2024030801
+```
+
+execute
+
+```
+./allocator ./data/jpn25.txt
+
+```
