@@ -250,7 +250,7 @@ void BipGraph::addEdge(int u, int v)
 }
 
 
-int main(){
+int main(int argc, char* argv[]){
    
    int i, j, k, l;
    int i_1, i_2;
@@ -279,12 +279,20 @@ int main(){
 
    int *pairU;
 
-   std::ifstream ifs("NSFNET_test_data5.txt");
+   string input_data_file;
+
+
+    if(argc == 2){
+        input_data_file = argv[1];
+    } else {
+        input_data_file = "data/nsfnet.txt";
+    }
+
+   std::ifstream ifs(input_data_file);
 
    if(!ifs){
 
-
-     std::cout << "Can't open file" << std::endl;
+     std::cout << "Can't open data input file: " << input_data_file << std::endl;
      return -1;
 
    }

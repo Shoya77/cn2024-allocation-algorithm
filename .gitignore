@@ -1,7 +1,4 @@
 *~
 *.txt
 allocator
-gen-data-cost239
-gen-data-jpn25
-gen-data-kanto
-gen-data-nsfnet
+generator
