@@ -1,7 +1,7 @@
 #include<iostream>
 #include<stdio.h>
 #include<vector>
-#include<random>
+#include<boost/random.hpp>
 #include <iomanip>
 #include<math.h>
 #include<fstream>
@@ -29,6 +29,7 @@ int main(int argc, char* argv[]){
     double ratio;
     string input_geo_file, input_net_file, input_area_file, output_file_prefix;
     unsigned seed;
+    typedef boost::mt19937 RNGType;
 
     if(argc == 9){
         input_geo_file = argv[1];
@@ -40,6 +41,7 @@ int main(int argc, char* argv[]){
         ratio = stod(argv[7]);
         seed = stoi(argv[8]);
     } else {
+        cout << "Using default values intead of arguments!" << endl;
         input_geo_file = "models/NSFNET_geo.csv";
         input_net_file = "models/NSFNET_net.csv";
         input_area_file = "models/NSFNET_area.csv";
@@ -49,10 +51,12 @@ int main(int argc, char* argv[]){
         ratio = 0.3;
         seed = 20240308;
     }
-      
+
+    RNGType rng(seed);
+    boost::uniform_int<> number_range_distribution( 0, RAND_MAX);
+    boost::variate_generator< RNGType, boost::uniform_int<> > get_random_int(rng, number_range_distribution);
 
     string output_file = output_file_prefix + to_string(num_SV) + "-" + to_string(num_TE) + "-" + to_string(ratio) + "-" + to_string(seed) + ".txt";
-    minstd_rand0 generator(seed);
        
     ifstream ifs_geo(input_geo_file);
     ifstream ifs_net(input_net_file);
@@ -141,11 +145,9 @@ int main(int argc, char* argv[]){
 
     vector<vector<int>> te_distance(num_TE, vector<int>(size_geo_SV));
 
-    srand(seed);
-
     ofs << "E_T" << endl;
 
-    rand() / (1.0 + RAND_MAX);
+    get_random_int() / (1.0 + RAND_MAX);
 
     std::string str_area;
     double area_density = 0.0;
@@ -166,8 +168,8 @@ int main(int argc, char* argv[]){
             area_lon_tra = stod(str_area_vec.at(4));
         }
 
-        te_location[t][0] = (rand() / (1.0 + RAND_MAX))*(area_lat - area_lat_tra) + area_lat_tra;
-        te_location[t][1] = (rand() / (1.0 + RAND_MAX))*(area_lon + area_lon_tra) - area_lon_tra;
+        te_location[t][0] = (get_random_int() / (1.0 + RAND_MAX))*(area_lat - area_lat_tra) + area_lat_tra;
+        te_location[t][1] = (get_random_int() / (1.0 + RAND_MAX))*(area_lon + area_lon_tra) - area_lon_tra;
 
         for(i = 0; i < num_SV; i++){
 
