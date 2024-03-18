@@ -155,7 +155,7 @@ int main(int argc, char* argv[]){
 
     for(t = 0; t < num_TE; t++){
 
-        if(t > area_density * num_TE){
+        if(t >= area_density * num_TE){
             ifs_area >> str_area;
             vector<string> str_area_vec = split(str_area, ',');
             area_density += stod(str_area_vec.at(0));
