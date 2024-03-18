@@ -166,7 +166,7 @@ int main(int argc, char* argv[]){
         }
 
         te_location[t][0] = (rand() / (1.0 + RAND_MAX))*(area_lat - area_lat_tra) + area_lat_tra;
-        te_location[t][1] = (rand() / (1.0 + RAND_MAX))*(area_lon + area_lon_tra) - area_lon_tra;
+        te_location[t][1] = (rand() / (1.0 + RAND_MAX))*(area_lon - area_lon_tra) + area_lon_tra;
 
         for(i = 0; i < num_SV; i++){
 
