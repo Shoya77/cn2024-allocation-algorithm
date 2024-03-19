@@ -453,7 +453,7 @@ int main(int argc, char* argv[]){
 
         //std::cout << endl;
 
-        Server usage_list_server[i];
+        Server usage_list_server[i+1];
 
         //std::cout << endl;
 
