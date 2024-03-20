@@ -41,9 +41,13 @@ The way of executing binaries, generator and allocator, is as follows:
   "models/JPN25_area.csv" contains information on the divided areas (the ratio of number of devices, latitude and longitude information) where IoT devices are distributed.
   "data/jpn25" is output file information for generated dataset.
   Note that you should make a directory named as "data" before you run the following code.
+  "14" indicates number of servers in a given network model (in JPN25 network model, 24 servers)
+  "300" indicates number of IoT devices in a model
+  "0.3" indicates a ratio of number of IoT devices to the total server capacities.
+  "2024030801" indicates a seed of randomly generated devices positions distribution.
 
 ```
-./generator models/JPN25_geo.csv models/JPN25_net.csv models/JPN25_area.csv data/jpn25 14 2000 0.3 2024030801
+./generator models/JPN25_geo.csv models/JPN25_net.csv models/JPN25_area.csv data/jpn25 24 300 0.3 2024030801
 ```
 
 If a dataset file can be correctly generated, 
@@ -56,3 +60,6 @@ If a dataset file can be correctly generated,
 ```
 ./allocator ./data/jpn25.txt
 ```
+
+
+
