@@ -51,7 +51,7 @@ The way of executing binaries, generator and allocator, is as follows:
 ```
 
 If a dataset file can be correctly generated, 
-"data file create at "data/jpn2514-2000-0.300000-2024030801.txt" is output.
+"data file create at "data/jpn2524-300-0.300000-2024030801.txt" is output.
 
 * allocator (solve the server allocation problem in IoT monitoring services)
 
