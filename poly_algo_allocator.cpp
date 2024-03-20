@@ -59,31 +59,6 @@ void select_usage(vector<int>& Usage, vector<Edge> const& edge, int num_SV, int 
 
 }
 
-/*
-void ToE2index(int *i_2_k, int *i_2_l, int i, int sum_M, Edge e, Server *usage_list_server){
-
-    int before_sum = 0;
-     
-     (*i_2_k) = e.index / sum_M;
-
-    for(int k=0;k<=i;k++){
-
-        if(e.s_index == usage_list_server[k].index){
-
-            for(int l=0;l<k;l++){
-               before_sum += usage_list_server[l].M_i;
-            }
-
-            k = i+1;
-
-        }
-
-    }
-
-    (*i_2_l) = before_sum;
-
-}
-*/
 
 class BipGraph
 {
@@ -390,10 +365,6 @@ int main(int argc, char* argv[]){
 
    vector<int> y_0(num_SV);
 
-   //vector<int> find_num(num_TE, -1);
-   
-   //std::cout << y_0[0] << ", " << y_0[1] << ", " << y_0[2] << endl;
-
    int z = 0;
 
    list_server_copy = list_server;
@@ -451,11 +422,7 @@ int main(int argc, char* argv[]){
 
         std::sort(Usage.begin(), Usage.end());   // sort {Usage} index in ascending 
 
-        //std::cout << endl;
-
         Server usage_list_server[i+1];
-
-        //std::cout << endl;
 
         for(b=0;b<=i;b++){
 
@@ -489,17 +456,6 @@ int main(int argc, char* argv[]){
         
         int usage_server;
         
-        /*
-        std::cout << "list_edge_t" << std::endl;
-        
-        for(int t=0;t<num_TE*num_SV;t++){
-
-            std::cout << list_edge_t[t].delay << ", ";
-
-        }
-
-        std::cout << std::endl;
-        */
         
         for(k=0;k<num_TE;k++){
             for(int s_i = 0; s_i <= i; s_i++){
@@ -510,8 +466,6 @@ int main(int argc, char* argv[]){
 
             }
         }
-        
-        //std::cout << "This 2" << std::endl;
 
         std::sort(E_t.begin(), E_t.end(), cmp_edge);   // only real edges sorting
         
@@ -543,30 +497,17 @@ int main(int argc, char* argv[]){
 
         std::vector<int> nodes;
 
-        //std::cout << "Start Hopcroft-Karp" << std::endl;
-
         int first_find_flag = 0;
 
         do_try = 0;
 
         gadd = 0;
 
-        //std::cout << " i : " << i << " j : " << j << std::endl;
-
         while(i_1 < num_TE*(i+1)){
 
            D_T = E_t[i_1].delay;
             
-            /*
-            if(first_find_flag == 1){
-
-                std::cout << "FIRST_MATCHING_FOUND!!" << endl;
-
-                break;
-            }
-            */
-            
-            if(E_t[i_1].delay >= T_delay){   // Check if Shining will {Usage}
+            if(E_t[i_1].delay >= T_delay){   // Check if Shining will for {Usage}
                 
                 //std::cout << "THIS E_tprime.delay" << E_t[i_1].delay <<  "MORE than" << T_delay << endl;
                 
@@ -597,12 +538,10 @@ int main(int argc, char* argv[]){
            
            int start_point = list_server[E_t[i_1].s_index].M_i * wanted_index;
 
-           //std::cout << "This 4" << std::endl;
-
            i_2_l = start_point;
            
-           E_t2prime[i_2_k][i_2_l] = E_t[i_1];  // This line causes problem.  // E_t[i_1].delay is negative.
-
+           E_t2prime[i_2_k][i_2_l] = E_t[i_1];  
+           
            hop_real_sindex[i_2_l] = E_t[i_1].s_index;
 
            g.addEdge(i_2_k+1, i_2_l+1);
@@ -635,10 +574,6 @@ int main(int argc, char* argv[]){
                 pairV[v] = NIL;
             }
 
-            //std::cout << "This 5" << std::endl;
-
-            //std::cout << "num_TE : " << num_TE << ", sum_M : " << sum_M << endl;
-            
             match = 0;
 
             int left_find_num = 0;
@@ -665,10 +600,6 @@ int main(int argc, char* argv[]){
 
                std::cout << "j : " << j << ", i : " << i << endl;
                
-               //max_num = *max_element(find_num.begin(), find_num.end());
-
-               //std::cout << max_num << endl;
-
                for(int u=0;u<num_TE;u++){
 
                  match_edge_delay[u] = E_t2prime[u][pairU[u+1]-1].delay; 
@@ -702,32 +633,11 @@ int main(int argc, char* argv[]){
                   for(int u=0;u<num_TE;u++){
 
                     x1[u] = hop_real_sindex[pairU[u+1]-1];
-                    
-                    /*
-                    if((pairU[u+1]) == NIL){
-
-                      std::cout << "u = " << u << " This is suspecious!!" << endl;
-
-                    }
-                    */
-
-                    /*
-                    if(T_delay_pre == 817)
-                      std::cout << "x1[ " << u << " ] = " << pairU[u+1]-1 << ", " << x1[u] << endl;  
-                    */
 
 
                     y[hop_real_sindex[pairU[u+1]-1]] = 1;
 
                   }
-                  
-                  /*
-                  for(int i1=0; i1<num_SV; i1++){
-
-                     //std::cout << "y[ " << i1 << " ] = " << y[i1] << endl;
-
-                  }
-                  */
 
                   z = j;
 
@@ -764,30 +674,26 @@ int main(int argc, char* argv[]){
    
    std::cout << "Allocation Algorithm Finished " << endl;
 
-   std::cout << "T_delay = " << T_delay << endl;     //  Most Important 
+   std::cout << "T_delay = " << T_delay << endl;     //  The Objective Value  Most Important 
 
    /*
    for(int u=0;u<num_TE;u++){
 
-     std::cout << "x [" << u << "]=" << x1[u] << endl;    // TE allocation server
+     std::cout << "x [" << u << "]=" << x1[u] << endl;    // TE-server allocation 
 
    }
    */
 
-
-
    for(int i=0;i<num_SV;i++){
 
-     std::cout << "y[ " << i << " ] = " << y[i] << endl;    // APL Usage servers
+     std::cout << "y[ " << i << " ] = " << y[i] << endl;    // APL Usage servers allocation
 
    }
      
-     std::cout << "z = " << z << endl;    // DB allocation server
+     std::cout << "z = " << z << endl;    // DB server allocation
    
-
    ifs.close();
 
    return 0;
 
 }
-
